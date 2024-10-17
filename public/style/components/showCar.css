@@ -1,0 +1,229 @@
+.showCarContainer{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+.carSlider{
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+.carSliderMain{
+	position: relative;
+}
+.carSliderMain > div{ 
+	width: 640px;
+	height: 384px;
+}
+.carSliderMain > div img{
+	border-radius: 3px;
+}
+.carSliderNav{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+}
+.carSliderNav div{
+	width: 100%;
+}
+.carSliderNav .slick-active{
+	width: 103px !important;
+	height: 62px;
+	margin-right: 4px;
+}
+.carSliderNav .slick-active img{
+	border-radius: 3px;
+}
+
+.custom-nav{
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	position: absolute;
+	bottom: 80px;
+	right: 20px;
+	background-color: rgba(56, 58, 63, .8);
+	border-radius: 3px;
+	padding: 8px;
+	color: #e0e1e5;
+	font-size: 12px;
+}
+
+.orderInspect{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #fff;
+	padding: 16px;
+	border-radius: 3px;
+}
+
+.orderInspect .icon{
+	width: 20px;
+	height: 20px;
+}
+
+.location, .checked, .typeSale, .allPrice{
+	width: 100%;
+	font-size: 14px;
+}
+.location, .checked, .typeSale{
+	padding: 20px 0;
+	border-bottom: 1px solid #e0e1e5;
+}
+.location, .checked > div, .typeSale > div, .allPrice > div {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.location{
+	padding-top: 0;
+}
+.allPrice, .checked, .typeSale, .allPrice{
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+.allPrice > div{
+	width: 100%;
+}
+.allPrice{
+	padding: 20px 0;
+}
+
+.moreOfCheck{
+	font-size: 14px;
+	color: #3c60e0;
+	margin-bottom: 10px;
+}
+.orderInspect button{
+	padding: 10px 0;
+	font-size: 14px;
+}
+
+.location p{
+	color: #69707e;
+}
+.location p span{
+	color: #383a3f;
+	font-weight: 500;
+}
+
+.checked span{
+	color: #383a3f;
+}
+.checked .intact span{
+	color: #84b156;
+}
+.checked .intact i{
+	font-size: 18px;
+}
+.fa-regular.fa-circle-question{
+	font-size: 18px;
+}
+.typeSale p, .allPrice p{
+	color: #383a3f;
+	font-weight: 700;
+}
+.typeSale p span, .allPrice p span{
+	font-weight: 400;
+	margin-right: 5px;
+}
+
+.buyBookNow{
+	height: 454px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #fff;
+	border-radius: 3px;
+	font-size: 16px;
+	color: #383a3f;
+}
+.buyBookNow h3{
+	font-weight: 700;
+}
+.buyBookNow .title{
+	padding: 16px;
+	border-bottom: 1px solid #e0e1e5;
+}
+.buy{
+	text-align: center;
+	line-height: 1.5;
+}
+.buyNow p{
+	font-weight: 500;
+}
+.buyBookNow .buttons, .buyBookNow .buttons button{
+	width: 100%;
+}
+.buyBookNow .buttons{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
+	padding: 16px;
+}
+.buyBookNow .buttons button{
+	padding: 10px 0;
+	font-size: 14px;
+}
+
+@media (max-width: 768px){
+	.showCarContainer{
+		flex-direction: column;
+		gap: 20px;
+	}
+	.carSlider,.orderInspect, .buyBookNow{
+		width: 100%;
+	}
+	.carSliderMain > div{ 
+		width: 100%;
+		height: max-content;
+	}
+	.carSliderNav .slick-active{
+		width: 16.1% !important;
+	}
+	.buyBookNow{
+		height: max-content;
+		justify-content: start;
+	}
+}
+@media (max-width: 708px){
+	.carSliderNav .slick-active{
+		width: 15.5% !important;
+	}
+}
+@media (max-width: 576px){
+	.carSliderNav .slick-active:nth-child(5),.carSliderNav .slick-active:nth-child(6){
+		display: none;
+	}
+	.carSliderNav .slick-active{
+		width: 24.2% !important;
+	}
+}
+@media (max-width: 500px){
+	.custom-nav{
+		bottom: 100px;
+	}
+	.carSliderNav{
+		margin-top: 5px;
+	}
+	.carSliderNav .slick-active:first-child{
+		padding-left: 10px;
+	}
+	.carSliderNav .slick-active{
+		width: 23.5% !important;
+		height: 84px;
+		margin-right: 5px;
+	}
+}
+@media (max-width: 331px){
+	.carSliderNav .slick-active{
+		width: 22.2% !important;
+		padding: 0;
+	}
+}

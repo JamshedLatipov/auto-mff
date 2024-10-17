@@ -1,0 +1,219 @@
+.topPage{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	z-index: 999;
+}
+header{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 25px;
+	background-color: #fff;
+	padding-top: 15px;
+	padding-bottom: 10px;
+}
+
+.logo{
+	display: flex;
+	flex-direction: column;
+}
+.logoMob{
+	display: none;
+	width: 100px;
+	height: 40px;
+}
+.logoImg{
+	width: 180px;
+	height: 24px;
+}
+.logo span{
+	font-size: 12px;
+}
+
+.searchBar{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+	border: 1px solid #E0E1E5;
+	border-radius: 3px;
+	padding: 9px 18px 9px 25px;
+}
+.searchBar input{
+	width: 100%;
+	height: 100%;
+	font-size: 16px;
+	outline: none;
+	border: none;
+}
+.searchBar input::placeholder{
+	font-size: 16px;
+	font-style: italic;
+}
+.searchBar:focus-within{
+	border-color: #69707E;
+}
+.searchBar i{
+	font-size: 20px;
+}
+
+.headerBtns{
+	display: flex;
+	align-items: center;
+	gap: 3px;
+}
+.headerBtns button, .buttonPrimaryAdap{
+	height: 42px;
+	padding: 11px 32px;
+	font-size: 16px;
+	font-weight: 400;
+	font-family: "Montserrat", sans-serif;
+}
+.buttonSecondaryAdap, .buttonPrimaryAdap, .buttonSecondaryAdap2{
+	display: none;
+}
+
+.navBar{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color: #383a3f;
+	height: 40px;
+	padding: 4px 15px;
+	color: #c1c2c4;
+}
+.navBar i{
+	font-size: 16px;
+}
+.leftNav, .rightNav{
+	display: flex;
+	gap: 15px;
+}
+.dropdown{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+}
+.flag{
+	width: 22px;
+}
+select{
+	width: 100%;
+	background-color: transparent;
+	outline: none;
+	border: none;
+	color: #c1c2c4;
+	font-size: 16px;
+}
+select option{
+	border-radius: 0 !important;
+	background-color: #383a3f;
+	font-size: 16px;
+}
+@media (max-width: 768px){
+	header{
+		justify-content: start;
+		gap: 65px;
+	}
+	.logo span{
+		display: none;
+	}
+	.logoImg{
+		display: none;
+	}
+	.logoMob{
+		display: flex;
+	}
+
+	.searchBar input{
+		font-size: 14px;
+	}
+	.searchBar input::placeholder{
+		font-size: 14px;
+	}
+	.searchBar i{
+		font-size: 16px;
+	}
+
+	.headerBtns{
+		gap: 8px;
+	}
+
+	.headerBtns .buttonSecondary{
+		display: none;
+	}
+	.buttonSecondaryAdap{
+		display: flex;
+		font-size: 30px;
+		cursor: pointer;
+	}
+	.navBar{
+		display: none;
+	}
+} 
+
+@media (max-width: 755px){
+	header{
+		gap: 45px;
+	}
+	.searchBar input{
+		font-size: 14px;
+	}
+	.searchBar input::placeholder{
+		font-size: 14px;
+	}
+}
+
+/* @media (max-width: 730px){
+	header{
+		gap: 10px;
+	}
+} */
+
+@media (max-width: 700px){
+	.searchBar{
+		width: 30%;
+	}
+}
+@media (max-width: 650px){
+	header{
+		gap: 35px;
+	}
+}
+@media (max-width: 640px){
+	.searchBar{
+		width: 25%;
+	}
+}
+@media (max-width: 600px){
+	header{
+		justify-content: space-around;
+		gap: inherit;
+	}
+	.searchBar{
+		display: none;
+	}
+	.headerBtns{
+		display: none;
+	}
+	.buttonPrimaryAdap{
+		padding: 9px 20px;
+		font-size: 14px;
+	}
+	.buttonPrimaryAdap, .buttonSecondaryAdap2{
+		display: flex;
+	}
+	.buttonSecondaryAdap2{
+		font-size: 30px;
+		cursor: pointer;
+	}
+}
+

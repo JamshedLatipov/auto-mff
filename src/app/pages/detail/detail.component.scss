@@ -1,0 +1,25 @@
+.carSlider {
+    position: relative;
+    .flag {
+        position: absolute;
+        z-index: 999999;
+        top: 10px;
+        right: 0;
+    }
+}
+.selectedItem {
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+}
+p-dropdown {
+    width: 100%;
+}
+
+.vin {
+    display: flex;
+    p {
+        margin-right: 10px;
+    }
+}

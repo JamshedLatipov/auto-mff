@@ -1,0 +1,614 @@
+<section class="home container" *ngIf="data$ | async as data">
+    <div class="tag">
+        <span>Главная страница</span>
+        <i class="fa-solid fa-angle-right" style="color: #383a3f;"></i>
+        <span>Поиск автомобиля</span>
+        <i class="fa-solid fa-angle-right" style="color: #383a3f;"></i>
+        <span>{{data.model.manufactor.data.attributes.name}}</span>
+        <i class="fa-solid fa-angle-right" style="color: #383a3f;"></i>
+        <span>{{data.data.attributes.year}} {{data.model.manufactor.data.attributes.name}} {{data.model.name}}</span>
+    </div>
+    <div class="title">
+        <div class="carName">
+            <h1>{{data.model.manufactor.data.attributes.name}} {{data.model.name}}, {{data.data.attributes.year}}</h1>
+            <div class="vin">
+                <p><span>Автомобиль</span> {{data.data.attributes.lot_number}}</p>
+                <p><span>VIN</span> {{data.data.attributes.vin}}</p>
+                <p>Отчет по VIN</p>
+            </div>
+        </div>
+        <div class="share">
+            <i class="fa-solid fa-share-nodes" ></i>
+        </div>
+        <div class="carNameAdap">
+            <h1>{{data.model.manufactor.data.attributes.name}} {{data.model.name}}, {{data.data.attributes.year}}</h1>
+            <div class="shareAdap">
+                <i class="fa-solid fa-share-nodes" ></i>
+            </div>
+        </div>
+        <p class='titleAdap'><span>Автомобиль</span> {{data.data.attributes.lot_number}}</p>
+        <p class='titleAdap'><span>VIN </span> {{data.data.attributes.vin}}</p>
+    </div>
+    <div class="showCarContainer">
+        <div class="carSlider">
+            <i class="flag flag-{{data.city.country.data.attributes.code}}"></i>
+
+            <p-galleria 
+                [value]="data.images" 
+                [containerStyle]="{ 'max-width': '640px' }" 
+                [numVisible]="5">
+                    <ng-template pTemplate="item" let-item>
+                        <img [src]="item.itemImageSrc" style="width: 100%;" />
+                    </ng-template>
+                    <ng-template pTemplate="thumbnail" let-item>
+                        <div class="grid grid-nogutter justify-content-center">
+                            <img [src]="item.thumbnailImageSrc" />
+                        </div>
+                    </ng-template>
+            </p-galleria>
+        </div>
+        <div class="orderInspect">
+            <div class="location">
+                <div class="icon">
+                    <img src="/img/gps.svg" alt="" class='img imgFit'>
+                </div>
+                <p><span>Место расположения:</span>  {{data.city.country.data.attributes.name}},  {{data.city.name}}</p>
+            </div>
+            <div class="checked">
+                <div class="start">
+                    <div class="icon">
+                        <img src="/img/rIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <span>Заводится и едет</span>
+                    <i class="fa-regular fa-circle-question" style="color: #3c60e0;"></i>
+                </div>
+                <div class="intact">
+                    <i class="fa-regular fa-circle-check" style="color: #84b156;"></i>
+                    <span>Не поврежден</span>
+                </div>
+            </div>
+            <div class="typeSale">
+                <div class="type">
+                    <div class="icon">
+                        <img src="/img/saleType.svg" alt="" class="img imgFit">
+                    </div>
+                    <p><span>Вид продажи:</span> По утверждению</p>
+                </div>
+                <div class="doc">
+                    <div class="icon">
+                        <img src="/img/doc.svg" alt="" class="img imgFit">
+                    </div>
+                    <p><span>Тип документов:</span> Чистый сертификат</p>
+                </div>
+            </div>
+            <div class="allPrice">
+                <div class="allPriceItem">
+                    <div class="icon">
+                        <img src="/img/price.svg" alt="" class="img imgFit">
+                    </div>
+                    <p><span>Минимальная цена продажи:</span> {{ data.data.attributes.min_price | number }} USD</p>
+                    <i class="fa-regular fa-circle-question" style="color: #3c60e0;"></i>
+                </div>
+                <div class="allPriceItem">
+                    <div class="icon">
+                        <img src="/img/price.svg" alt="" class="img imgFit">
+                    </div>
+                    <p><span>Средняя цена продажи:</span>{{ data.data.attributes.avg_price | number }} USD</p>
+                    <i class="fa-regular fa-circle-question" style="color: #3c60e0;"></i>
+                </div>
+                <div class="allPriceItem">
+                    <div class="icon">
+                        <img src="/img/price.svg" alt="" class="img imgFit">
+                    </div>
+                    <p><span>Максимальная цена продажи:</span>{{ data.data.attributes.max_price | number }} USD</p>
+                    <i class="fa-regular fa-circle-question" style="color: #3c60e0;"></i>
+                </div>
+            </div>
+            <p class="moreOfCheck">Больше о проверке <i class="fa-solid fa-chevron-right" style="color: #3c60e0;"></i></p>
+            <button class="button buttonSecondary" (click)="confirm1($event)">Заказать инспекцию</button>
+        </div>
+        <div class="buyBookNow">
+            <h3 class='title'>По утверждению</h3>
+            <div class="buy">
+                <h3>Купить сейчас</h3>
+                <p>{{ data.data.attributes.total_sum | number }} USD</p>
+            </div>
+            <div class="buttons">
+                <button class="button buttonSecondary" (click)="confirm1($event)">Забронировать</button>
+                <button class="button buttonPrimary" (click)="confirm1($event)">Купить сейчас</button>
+            </div>
+        </div>
+    </div>
+    <div class="features">
+        <h1>Характеристики транспортного средства</h1>
+        <div class="featuresContainer">
+            <div class="featuresCard">
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/carIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Марка: <span>{{data.model.manufactor.data.attributes.name}}</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/carIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Тип кузова: <span>Седан</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/speedIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p class='notDecor'>Пробег: <span>90 000 км (55 924 миль)</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/engineIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Мощность двигателя: <span>1.2 L (1149 CC)</span></p>
+                </div>
+            </div>
+            <div class="featuresCard">
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/carIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Модель: <span>{{data.model.name}}</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/fuelIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Тип топлива: <span>Газовое</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/gearIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Трансмиссия: <span>Механическая</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/colorIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Цвет: <span>Серый</span></p>
+                </div>
+            </div>
+            <div class="featuresCard">
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/calendarIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Год: <span>{{data.data.attributes.year}}</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/transmissionIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Привод: <span>Передний привод</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/keyIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p class='notDecor'>Ключи: <span>Да</span></p>
+                </div>
+            </div>
+            <div class="featuresCard">
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/carIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Марка: <span>{{data.model.manufactor.data.attributes.name}}</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/carIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Тип кузова: <span>Седан</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/speedIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p class='notDecor'>Пробег: <span>90 000 км (55 924 миль)</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/engineIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Мощность двигателя: <span>1.2 L (1149 CC)</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/carIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Модель: <span>{{data.model.name}}</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/fuelIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Тип топлива: <span>Газовое</span></p>
+                </div>
+            </div>
+            <div class="featuresCard">
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/gearIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Трансмиссия: <span>Механическая</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/colorIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Цвет: <span>Серый</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/calendarIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Год: <span>{{data.data.attributes.year}}</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/transmissionIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Привод: <span>Передний привод</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/keyIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p class='notDecor'>Ключи: <span>Да</span></p>
+                </div>
+            </div>
+            <div class="featuresCard">
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/carIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Марка: <span>{{data.model.manufactor.data.attributes.name}}</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/carIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Тип кузова: <span>Седан</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/speedIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p class='notDecor'>Пробег: <span>90 000 км (55 924 миль)</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/engineIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Мощность двигателя: <span>1.2 L (1149 CC)</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/carIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Модель: <span>{{data.model.name}}</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/fuelIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Тип топлива: <span>Газовое</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/gearIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Трансмиссия: <span>Механическая</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/colorIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Цвет: <span>Серый</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/calendarIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Год: <span>{{data.data.attributes.year}}</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/transmissionIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p>Привод: <span>Передний привод</span></p>
+                </div>
+                <div class="featuresItem">
+                    <div class="icon">
+                        <img src="/img/keyIcon.svg" alt="" class="img imgFit">
+                    </div>
+                    <p class='notDecor'>Ключи: <span>Да</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="priceCalculate">
+        <h1>Расчет предполагаемой цены автомобиля</h1>
+        <div class="middle">
+            <div class="left">
+                <div class="detailDel">
+                    <h4>Детали доставки</h4>
+                    <p>
+                        Обратите внимание, что на данном этапе 
+                        мы рассчитываем примерную стоимость доставки, 
+                        и при оформлении покупки и доставки она может незначительно отличаться.
+                    </p>
+                </div>
+                <div class="selectDel">
+                    <label for="countryDel">Выберите страну доставки</label>
+                    <div class="dropdown" *ngIf="(countries$ | async) as countries">
+                        <p-dropdown 
+                            [options]="countries.data" 
+                            [(ngModel)]="selectedCountry"
+                            optionLabel="name"
+                            placeholder="Выберите страну доставки"
+                            [style]="{width: '100%'}">
+                                <ng-template pTemplate="selectedItem">
+                                    <div class="selectedItem" *ngIf="selectedCountry">
+                                        <i class="flag flag-{{selectedCountry.attributes.code}}"></i>
+                                        <div>{{ selectedCountry.attributes.name }}</div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-country pTemplate="item">
+                                    <div class="selectedItem" (click)="clearCity()">
+                                        <i class="flag flag-{{country.attributes.code}}"></i>
+                                        <div>{{ country.attributes.name }}</div>
+                                    </div>
+                                </ng-template>
+                        </p-dropdown>
+                    </div>
+                    <label for="cityDel">Выберите город или порт доставки</label>
+                    <div class="dropdown" *ngIf="(countries$ | async) as countries">
+                        <p-dropdown 
+                            [options]="selectedCountry?.attributes?.cities?.data" 
+                            [(ngModel)]="selectedCity"
+                            optionLabel="name"
+                            placeholder="Выберите страну доставки"
+                            [style]="{width: '100%'}">
+                                <ng-template pTemplate="selectedItem">
+                                    <div class="selectedItem" *ngIf="selectedCity">
+                                        <div>{{ selectedCity?.attributes?.name }}</div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-city pTemplate="item">
+                                    <div class="selectedItem">
+                                        <div>{{ city.attributes.name }}</div>
+                                    </div>
+                                </ng-template>
+                        </p-dropdown>
+                    </div>
+                    <p>
+                        К сожалению, мы не смогли рассчитать стоимость доставки в выбранное место.
+                        Стоимость доставки будет рассчитываться в индивидуальном порядке.
+                    </p>
+                </div>
+            </div>
+            <div class="right">
+                <div class="costCar">
+                    <h4>Цена автомобиля</h4>
+                    <span>{{ data.data.attributes.total_sum | number }} USD</span>
+                </div>
+                <div class="costCar">
+                    <h4>Стоимость доставки</h4>
+                    <span>{{ selectedCountry && selectedCity ? selectedCountry?.attributes.delivery || 0: 0 }} USD</span>
+                </div>
+                <div class="costCar">
+                    <h4>Плата за услуги аукциона PLC</h4>
+                    <span>300 USD</span>
+                </div>
+                <div class="costCar">
+                    <h4>Таможенно-брокерские услуги</h4>
+                    <span>380 USD</span>
+                </div>
+            </div>
+        </div>
+        <div class="totalPrice">
+            <span>Общая сумма</span>
+            <span>{{ data.data.attributes.total_sum | number }} USD</span>
+        </div>
+    </div>
+    <div class="askQuestion">
+        <div>
+            <p>Если у вас есть вопросы, пожалуйста, свяжитесь с нами.</p>
+            <p>Наши менеджеры ответят на все ваши вопросы в ближайшее время.</p>
+        </div>
+        <button class="button buttonSecondary"> Задать вопрос <i class="fa-regular fa-comment-dots" style="color: #b94141;"></i></button>
+    </div>
+    <div class="buyNow">
+        <h2>Вы можете купить это автомобиль прямо сейчас!</h2>
+        <div class="btns">
+            <button class="button buttonPrimary" (click)="confirm1($event)">Купить сейчас: {{ data.data.attributes.total_sum | number }} USD</button>
+            <button class="button buttonSecondary" (click)="confirm1($event)">Забронировать</button>
+        </div>
+    </div>
+    <div class="tabs">
+        <div class="tab-header">
+            <div class="tab-item" [class.active]="selectedHorTab === 1" (click)="selectedHorTab = 1">Комфорт и удобство</div>
+            <div class="tab-item" [class.active]="selectedHorTab === 2" (click)="selectedHorTab = 2">Развлечения и мультимедиа</div>
+            <div class="tab-item" [class.active]="selectedHorTab === 3" (click)="selectedHorTab = 3">Безопасность и охрана</div>
+        </div>
+        <div class="tab-content" [class.active]="selectedHorTab === 1" id="tab-1">
+            <ul>
+                <li>Кондиционер</li>
+                <li>Круиз-контроль</li>
+            </ul>
+            <ul>
+                <li>Электрические боковые зеркала</li>
+                <li>Многофункциональное рулевое колесо</li>
+            </ul>
+            <ul>
+                <li>Раздельные задние сиденья</li>
+                <li>Система "старт-стоп"</li>
+            </ul>
+        </div>
+        <div class="tab-content" id="tab-2" [class.active]="selectedHorTab === 2">
+            <ul>
+                <li>Bluetooth</li>
+                <li>Проигрыватель компакт-дисков</li>
+            </ul>
+            <ul>
+                <li>MP3</li>
+                <li>Бортовой компьютер</li>
+            </ul>
+            <ul>
+                <li>Радио</li>
+                <li>USB</li>
+            </ul>
+        </div>
+        <div class="tab-content" id="tab-3" [class.active]="selectedHorTab === 3">
+            <ul>
+                <li>ABS</li>
+                <li>Система сигнализации</li>
+                <li>Центральный замок двери</li>
+                <li>Дневные ходовые огни</li>
+                <li>Подушка безопасности со стороны водителя</li>
+            </ul>
+            <ul>
+                <li>Противотуманные фары</li>
+                <li>Головная подушка безопасности</li>
+                <li>Иммобилайзер</li>
+                <li>Isofix</li>
+                <li>Подушка безопасности со стороны пассажира</li>
+            </ul>
+            <ul>
+                <li>Усилитель руля</li>
+                <li>Боковая подушка безопасности</li>
+                <li>Система контроля давления в шинах</li>
+                <li>Контроль тяги</li>
+            </ul>
+        </div>
+    </div>
+    <div class="tabsAdap">
+        <div class="tab-item-adap"  (click)="selectedVerTab = 1">
+            <span>Комфорт и удобство</span>
+            <i  [class]="{'fa-chevron-down': selectedVerTab !== 1, 'fa-chevron-up': selectedVerTab === 1}" class="fas"></i>
+        </div>
+        <div class="tab-content-adap" id="tabAdap-1" [class.active]="selectedVerTab === 1">
+            <ul>
+                <li>Кондиционер</li>
+                <li>Круиз-контроль</li>
+                <li>Электрические боковые зеркала</li>
+                <li>Многофункциональное рулевое колесо</li>
+                <li>Раздельные задние сиденья</li>
+                <li>Система "старт-стоп"</li>
+            </ul>
+        </div>
+        <div class="tab-item-adap" data-tab="tabAdap-2" (click)="selectedVerTab = 2">
+            <span>Развлечения и мультимедиа</span>
+            <i [class]="{'fa-chevron-down': selectedVerTab !== 2, 'fa-chevron-up': selectedVerTab === 2}" class="fas"></i>
+        </div>
+        <div class="tab-content-adap" id="tabAdap-2" [class.active]="selectedVerTab === 2">
+            <ul>
+                <li>Bluetooth</li>
+                <li>Проигрыватель компакт-дисков</li>
+                <li>MP3</li>
+                <li>Бортовой компьютер</li>
+                <li>Радио</li>
+                <li>USB</li>
+            </ul>
+        </div>
+        <div class="tab-item-adap" data-tab="tabAdap-3" (click)="selectedVerTab = 3">
+            <span>Безопасность и охрана</span>
+            <i [class]="{'fa-chevron-down': selectedVerTab !== 3, 'fa-chevron-up': selectedVerTab === 3}" class="fas"></i>
+        </div>
+        <div class="tab-content-adap" id="tabAdap-3" [class.active]="selectedVerTab === 3">
+            <ul>
+                <li>ABS</li>
+                <li>Система сигнализации</li>
+                <li>Центральный замок двери</li>
+                <li>Дневные ходовые огни</li>
+                <li>Подушка безопасности со стороны водителя</li>
+                <li>Противотуманные фары</li>
+                <li>Головная подушка безопасности</li>
+                <li>Иммобилайзер</li>
+                <li>Isofix</li>
+                <li>Подушка безопасности со стороны пассажира</li>
+                <li>Усилитель руля</li>
+                <li>Боковая подушка безопасности</li>
+                <li>Система контроля давления в шинах</li>
+                <li>Контроль тяги</li>
+            </ul>
+        </div>
+    </div>
+    <div class="buyNow">
+        <h2>Вы можете купить это автомобиль прямо сейчас!</h2>
+        <div class="btns">
+            <button class="button buttonPrimary" (click)="confirm1($event)">Купить сейчас: {{ data.data.attributes.total_sum | number }} USD</button>
+            <button class="button buttonSecondary" (click)="confirm1($event)">Забронировать</button>
+        </div>
+    </div>
+    <div class="askQuestion">
+        <div>
+            <p>Если у вас есть вопросы, пожалуйста, свяжитесь с нами.</p>
+            <p>Наши менеджеры ответят на все ваши вопросы в ближайшее время.</p>
+        </div>
+        <button class="button buttonSecondary"> Задать вопрос <i class="fa-regular fa-comment-dots" style="color: #b94141;"></i></button>
+    </div>
+    <div class="addFeatures">
+        <h2 class='title'>Дополнительные характеристики</h2>
+        <p class='desk'>
+            Вашему вниманию представлен бу автомобиль {{data.model.manufactor.data.attributes.name}} {{data.model.name}} {{data.data.attributes.year}} года выпуска., 
+            купить который вы можете с помощью одной из самых крупных компаний по доставке 
+            подержанных авто – PLC Auctions.
+        </p>
+        <h2>Основные характеристики автомобиля {{data.model.manufactor.data.attributes.name}} {{data.model.name}} {{data.data.attributes.year}} из {{data.city.country.data.attributes.name}}</h2>
+        <ul>
+            <li>VIN-код: {{data.data.attributes.vin}};</li>
+            <li>Год выпуска: {{data.data.attributes.year}};</li>
+            <li>Местонахождение авто: {{data.city.country.data.attributes.name}};</li>
+            <li>Тип кузова: {{ bodyTypes[data.data.attributes.body_type] }};</li>
+            <li>Цвет кузова: {{ data.data.attributes.color }};</li>
+            <li>Тип трансмиссии: {{ transmision[data.data.attributes.transmission] }};</li>
+            <li>Тип топлива: {{ data.data.attributes.fuel_type }};</li>
+            <li>Повреждения: .</li>
+        </ul>
+        <h2>Условия покупки лота</h2>
+        <p>
+            На данный момент стоимость лота составляет 0 USD, 
+            однако она может изменяться с появлением новых ставок на аукционе. 
+            Также данный автомобиль можно выкупить без участие в аукционе по цене {{ data.data.attributes.total_sum | number }} USD. 
+            Окончательная цена автомобиля или цена «под ключ», формируется с учетом стоимости его доставки к заказчику, 
+            расходов на оформление документов, сборов аукцион
+        </p>
+        <p>
+            Компания PLC Auctions обязуется пригнать автомобиль в любую страну Европы. 
+            Сроки доставки зависят от месторасположения лота и адреса, указанного заказчиком.
+        </p>
+        <p>
+            Узнайте более детальную информация на нашем сайте: ответы на все часто задаваемые вопросы, 
+            доставки авто, о других особенностях покупки автомобиля с помощью нашей компании.
+        </p>
+    </div>
+</section>
+<p-toast />
+<p-confirmDialog #dialog >
+    <ng-template pTemplate="headless" let-message>
+        <div style="background: white; border-radius: 10px;" class="flex flex-column align-items-center p-5 surface-overlay border-round">
+            
+            <div style="font-weight: 700 !important; margin-bottom: 20px !important;">{{ message.header }}</div>
+
+            <p class="mb-0">{{ message.message }}</p>
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
+                <button 
+                    pButton 
+                    label="Понятно" 
+                    (click)="dialog.accept()" 
+                    class="w-8rem">
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</p-confirmDialog>

@@ -1,0 +1,98 @@
+.tabs {
+	width: 100%;
+	border-radius: 3px;
+	margin-top: 40px;
+}
+
+.tab-header {
+	width: fit-content;
+	display: flex;
+	background-color: #fff;
+	border-bottom: 2px solid #e0e0e0;
+	border-radius: 3px;
+}
+
+.tab-item {
+	padding: 10px 20px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.tab-item:hover {
+	background-color: #f0f0f0;
+}
+
+.tab-item.active {
+	border-bottom: 3px solid #b94141;
+	font-weight: 600;
+}
+
+.tab-content, .tab-content-adap {
+	display: none;
+}
+
+.tab-content.active, .tab-content-adap.active {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	padding: 16px 24px 30px;
+	background-color: #fff;
+}
+
+.tab-content ul, .tab-content-adap ul{
+	list-style-type: disc;
+	list-style-position: inside;
+	color: #b94141;
+}
+.tab-content ul li::marker, .tab-content-adap ul li::marker{
+	color: #b94141;
+}
+.tab-content ul li , .tab-content-adap ul li{
+	margin: 5px 0;
+	font-size: 16px;
+	color: #69707e;
+}
+.tab-content-adap ul{
+	display: flex;
+	flex-direction: row;
+    flex-wrap: wrap;
+	list-style: disc;
+}
+.tab-content-adap ul li{
+	font-size: 15px;
+	flex: 1 1 45%; /* This allows for two columns, each taking about 45% of the space */
+    margin-bottom: 10px;
+}
+
+.tabsAdap {
+	width: 100%;
+	margin-top: 20px;
+	background-color: #fff;
+	border-radius: 3px;
+	display: flex;
+	flex-direction: column;
+}
+
+.tabsAdap .tab-item-adap {
+	padding: 15px;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.tabsAdap .tab-item-adap.active {
+	font-weight: 500;
+	border-bottom: none;
+}
+@media (max-width: 768px){
+	.tabs{
+		display: none;
+	}
+}
+@media (max-width: 590px){
+	.tab-content-adap ul li{
+		flex: 1 1 100%; 
+	}
+}

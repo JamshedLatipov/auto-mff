@@ -1,0 +1,84 @@
+.askQuestion{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 3px;
+	background-color: #fff;
+	padding: 16px;
+	margin-top: 40px;
+}
+
+.askQuestion p{
+	color: #383a3f;
+	font-size: 16px;
+	margin-bottom: 5px;
+	font-weight: 700;
+}
+
+.askQuestion button{
+	gap: 5px;
+	padding: 11px 32px;
+	border-color: #b94141;
+	color: #b94141;
+	font-size: 16px;
+	letter-spacing: 1.2px;
+}
+.askQuestion button i{
+	font-size: 22px;
+}
+
+.askQuestion button:hover{
+	background-color: #b94141;
+	color: #fff;
+	border-color: #b94141;
+}
+
+.askQuestion button:hover i{
+	color: #fff !important;
+}
+
+.buyNow{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #383a3f;
+	border-radius: 3px;
+	padding: 16px;
+	margin-top: 40px;
+}
+.buyNow h2{
+	font-size: 20px;
+	font-weight: 700;
+	color: #fff;
+}
+.buyNow .btns {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+.buyNow .btns button{
+	width: 302px;
+	font-size: 16px;
+	padding: 11px 32px;
+}
+.buyNow .btns button:last-child{
+	border-color: #fff;
+	color: #fff;
+}
+.buyNow .btns button:last-child:hover{
+	background-color: #E0E1E5;
+	color: #383a3f;
+}
+
+@media (max-width: 768px){
+	.askQuestion{
+		flex-direction: column;
+		gap: 10px;
+		text-align: center;
+	}
+	.buyNow{
+		display: none;
+	}
+}

@@ -1,0 +1,106 @@
+.priceCalculate .middle{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
+}
+.priceCalculate .middle :where(.left, .right){
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.priceCalculate .middle h4, .costCar span{
+	color: #383a3f;
+	font-size: 16px;
+	font-weight: 700;
+	padding: 16px 0;
+}
+
+.priceCalculate .middle .right div{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.costCar{
+	border-bottom: 1px solid #e0e1e5;
+}
+.costCar:last-child{
+	border-bottom: none;
+}
+
+.priceCalculate .middle .left .detailDel{
+	font-size: 14px;
+	color: #69707e;
+	padding-bottom: 16px;
+	border-bottom: 1px solid #e0e1e5;
+}
+
+.priceCalculate .middle .left .selectDel{
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	padding-top: 16px;
+}
+.priceCalculate .middle .left .selectDel label{
+	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #383a3f;
+}
+
+.priceCalculate .middle .left .selectDel p{
+	font-size: 14px;
+	color: #952F2F;
+	padding-bottom: 16px;
+}
+.priceCalculate .middle .left .selectDel .dropdown{
+	width: 100%;
+	border: 1px solid #e0e1e5;
+	border-radius: 3px;
+	padding: 5px 10px;
+	display: flex;
+	min-height: 40px;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.priceCalculate .middle .left .selectDel .dropdown .dropdownItem{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+}
+
+.priceCalculate .middle .left .selectDel .dropdown input{
+	width: 100%;
+	height: 100%;
+	font-size: 16px;
+	border: none;
+	outline: none;
+}
+.priceCalculate .middle .left .selectDel .dropdown input::placeholder{
+	font-size: 16px;
+	color: #e0e1e5;
+}
+
+.priceCalculate .totalPrice{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 16px;
+	border-top: 1px solid #e0e1e5;
+}
+.priceCalculate .totalPrice span{
+	color: #383a3f;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+@media (max-width: 768px){
+	.priceCalculate .middle{
+		flex-direction: column;
+	}
+}
