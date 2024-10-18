@@ -36,8 +36,9 @@ export class DetailComponent implements OnInit {
   public countries$: Observable<Country> | undefined;
   public selectedCountry: any;
   public selectedCity: any;
-  public selectedHorTab = 1
-  public selectedVerTab = 1
+  public selectedHorTab = 1;
+  public selectedVerTab = 1;
+  public activeIndex = 0;
   public bodyTypes: any = {
     SEDAN: 'Седан',
     WAGUN: 'Универсал',

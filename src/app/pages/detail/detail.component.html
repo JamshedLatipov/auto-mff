@@ -32,10 +32,10 @@
     <div class="showCarContainer">
         <div class="carSlider">
             <i class="flag flag-{{data.city.country.data.attributes.code}}"></i>
-
             <p-galleria 
                 [value]="data.images" 
                 [containerStyle]="{ 'max-width': '640px' }" 
+                [(activeIndex)]="activeIndex"
                 [numVisible]="5">
                     <ng-template pTemplate="item" let-item>
                         <img [src]="item.itemImageSrc" style="width: 100%;" />
@@ -43,6 +43,13 @@
                     <ng-template pTemplate="thumbnail" let-item>
                         <div class="grid grid-nogutter justify-content-center">
                             <img [src]="item.thumbnailImageSrc" />
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="footer" let-item>
+                        <div class="custom-galleria-footer">
+                            <span *ngIf="data?.images" class="title-container">
+                                <span>{{ activeIndex + 1 }} / {{ data?.images?.length }}</span>
+                            </span>
                         </div>
                     </ng-template>
             </p-galleria>
@@ -133,19 +140,19 @@
                     <div class="icon">
                         <img src="/img/carIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Тип кузова: <span>Седан</span></p>
+                    <p>Тип кузова: <span>{{ bodyTypes[data.data.attributes.body_type] }}</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
                         <img src="/img/speedIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p class='notDecor'>Пробег: <span>90 000 км (55 924 миль)</span></p>
+                    <p class='notDecor'>Пробег: <span>{{data.data.attributes.milage | number }} км ({{(+data.data.attributes.milage * 1.60934) | number}} миль)</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
                         <img src="/img/engineIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Мощность двигателя: <span>1.2 L (1149 CC)</span></p>
+                    <p>Мощность двигателя: <span>{{data.data.attributes.engine}}</span></p>
                 </div>
             </div>
             <div class="featuresCard">
@@ -159,19 +166,19 @@
                     <div class="icon">
                         <img src="/img/fuelIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Тип топлива: <span>Газовое</span></p>
+                    <p>Тип топлива: <span>{{data.data.attributes.fuel_type}}</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
                         <img src="/img/gearIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Трансмиссия: <span>Механическая</span></p>
+                    <p>Трансмиссия: <span>{{transmision[data.data.attributes.transmission]}}</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
                         <img src="/img/colorIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Цвет: <span>Серый</span></p>
+                    <p>Цвет: <span>{{data.data.attributes.color}}</span></p>
                 </div>
             </div>
             <div class="featuresCard">
@@ -205,19 +212,19 @@
                     <div class="icon">
                         <img src="/img/carIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Тип кузова: <span>Седан</span></p>
+                    <p>Тип кузова: <span>{{ bodyTypes[data.data.attributes.body_type] }}</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
                         <img src="/img/speedIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p class='notDecor'>Пробег: <span>90 000 км (55 924 миль)</span></p>
+                    <p class='notDecor'>Пробег: <span>{{data.data.attributes.milage}} км ({{(+data.data.attributes.milage * 1.60934)}} миль)</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
                         <img src="/img/engineIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Мощность двигателя: <span>1.2 L (1149 CC)</span></p>
+                    <p>Мощность двигателя: <span>{{data.data.attributes.engine}}</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
@@ -229,7 +236,7 @@
                     <div class="icon">
                         <img src="/img/fuelIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Тип топлива: <span>Газовое</span></p>
+                    <p>Тип топлива: <span>{{data.data.attributes.fuel_type}}</span></p>
                 </div>
             </div>
             <div class="featuresCard">
@@ -237,13 +244,13 @@
                     <div class="icon">
                         <img src="/img/gearIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Трансмиссия: <span>Механическая</span></p>
+                    <p>Трансмиссия: <span>{{transmision[data.data.attributes.transmission]}}</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
                         <img src="/img/colorIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Цвет: <span>Серый</span></p>
+                    <p>Цвет: <span>{{data.data.attributes.color}}</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
@@ -275,19 +282,19 @@
                     <div class="icon">
                         <img src="/img/carIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Тип кузова: <span>Седан</span></p>
+                    <p>Тип кузова: <span>{{ bodyTypes[data.data.attributes.body_type] }}</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
                         <img src="/img/speedIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p class='notDecor'>Пробег: <span>90 000 км (55 924 миль)</span></p>
+                    <p class='notDecor'>Пробег: <span>{{data.data.attributes.milage}} км ({{(+data.data.attributes.milage * 1.60934)}} миль)</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
                         <img src="/img/engineIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Мощность двигателя: <span>1.2 L (1149 CC)</span></p>
+                    <p>Мощность двигателя: <span>{{data.data.attributes.engine}}</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
@@ -299,19 +306,19 @@
                     <div class="icon">
                         <img src="/img/fuelIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Тип топлива: <span>Газовое</span></p>
+                    <p>Тип топлива: <span>{{data.data.attributes.fuel_type}}</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
                         <img src="/img/gearIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Трансмиссия: <span>Механическая</span></p>
+                    <p>Трансмиссия: <span>{{transmision[data.data.attributes.transmission]}}</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
                         <img src="/img/colorIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p>Цвет: <span>Серый</span></p>
+                    <p>Цвет: <span>{{data.data.attributes.color}}</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
