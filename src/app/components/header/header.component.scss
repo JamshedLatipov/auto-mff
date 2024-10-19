@@ -1,0 +1,45 @@
+.searchBar {
+    position: relative;
+    .items {
+        z-index: 10000;
+        top: 40px;
+        &-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid gray;   
+        }
+        &-main-info {
+            display: flex;
+            .img {
+                width: 40px;
+            }
+            .name, .year {
+                margin-left: 10px
+            }
+            .year {
+                font-size: 13px;
+                font-weight: 500;
+                color: gray;
+            }
+            .name {
+                font-size: 16px;
+                font-weight: 500;
+            }
+        }
+        border: 1px solid #333;
+        position: absolute;
+        overflow-y: auto;
+        left: 0;
+        background: white;
+        max-height: 300px;
+        width: 100%;
+    }   
+}
+
+a {
+   display: flex;
+   width: 100%;
+   justify-content: space-between;
+}

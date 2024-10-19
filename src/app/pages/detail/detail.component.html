@@ -30,12 +30,37 @@
         <p class='titleAdap'><span>VIN </span> {{data.data.attributes.vin}}</p>
     </div>
     <div class="showCarContainer">
+        <!-- Info: this shit shouldn't be used :) fuck that :) -->
         <div class="carSlider">
             <i class="flag flag-{{data.city.country.data.attributes.code}}"></i>
             <p-galleria 
                 [value]="data.images" 
                 [containerStyle]="{ 'max-width': '640px' }" 
                 [(activeIndex)]="activeIndex"
+                [numVisible]="5">
+                    <ng-template pTemplate="item" let-item>
+                        <img (click)="setFullScreen()" [src]="item.itemImageSrc" style="width: 100%;" />
+                    </ng-template>
+                    <ng-template pTemplate="thumbnail" let-item>
+                        <div class="grid grid-nogutter justify-content-center">
+                            <img [src]="item.thumbnailImageSrc" />
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="footer" let-item>
+                        <div class="custom-galleria-footer">
+                            <span *ngIf="data?.images" class="title-container">
+                                <span>{{ activeIndex + 1 }} / {{ data?.images?.length }}</span>
+                            </span>
+                        </div>
+                    </ng-template>
+            </p-galleria>
+            <p-galleria 
+                *ngIf="visibility"
+                [value]="data.images" 
+                [containerStyle]="{ 'max-width': '640px' }" 
+                [(activeIndex)]="activeIndex"
+                [(visible)]="visibility"
+                [fullScreen]="fullScreen"
                 [numVisible]="5">
                     <ng-template pTemplate="item" let-item>
                         <img [src]="item.itemImageSrc" style="width: 100%;" />

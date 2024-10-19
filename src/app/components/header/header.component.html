@@ -10,7 +10,27 @@
             <span>by PLC Group</span>
         </div>
         <div class="searchBar">
-            <input type="text" placeholder='Введите Марку/Модель/VIN/Лот'>
+            <input [formControl]="searchControl" style="width: 100%;" type="text"
+                placeholder='Введите VIN/Номер Лота'>
+            <div *ngIf="results$ | async as results" class="items">
+                <div *ngFor="let item of results.data" class="items-container">
+                    <a href="/detail/{{item.id}}">
+                        <div class="items-main-info">
+                            <img class="img" [src]="backURL + item.attributes?.images.data[0].attributes.url" alt="">
+                            <div>
+                                <div class="name">
+                                    {{item.attributes.car_model.data.attributes.manufactor.data.attributes.name}}
+                                    {{item.attributes.car_model.data.attributes.name}}, {{item.attributes.year}}</div>
+                                <div class="year">{{item.attributes.vin}} | {{item.attributes.lot_number}}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="name"><b style="font-weight: 700;">{{item.attributes.total_sum | number }}
+                                    USD</b></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
             <i class="fa-solid fa-magnifying-glass" style="color: #878d98;"></i>
         </div>
         <div class="headerBtns">
@@ -30,13 +50,22 @@
         </div>
         <div class="rightNav">
             <i class="fa-solid fa-location-dot" style="color: #fdfefe;"></i>
-            <div class="dropdown">
-                <div class="flag">
-                    <i class="flag flag-tajikistan"></i>
-                </div>
-                <span>Tajikistan</span>
-                <i class="fa-solid fa-chevron-down" style="color: #c1c2c4;"></i>
-            </div>
+            <p-dropdown [options]="(countries$ | async)?.data" [(ngModel)]="selectedCountry" optionLabel="name"
+                [style]="{width: '100%', background: 'transparent'}">
+                <ng-template pTemplate="selectedItem">
+                    <div style="color: white !important; display: flex; align-items: center;" class="selectedItem"
+                        *ngIf="selectedCountry">
+                        <i class="flag flag-{{selectedCountry?.attributes?.code}}"></i>
+                        <div>{{ selectedCountry?.attributes?.name }}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-country pTemplate="item">
+                    <div style="display: flex; align-items: center; padding: 10px;" class="selectedItem">
+                        <i class="flag flag-{{country.attributes.code}}"></i>
+                        <div>{{ country.attributes.name }}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
             <i class="fa-regular fa-clock" style="color: #fdfefe;"></i>
             <span>GMT+1 (CET)</span>
             <i class="fa-solid fa-chevron-down" style="color: #c1c2c4;"></i>

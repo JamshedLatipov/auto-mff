@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { GalleriaModule } from 'primeng/galleria';
+import { Component, computed, effect, OnInit, signal, ViewChild } from '@angular/core';
+import { Galleria, GalleriaModule } from 'primeng/galleria';
 import { ArticleService } from '../../services/article.service';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleResponse, CarModel, City, Country, Image } from '../../models/article';
 import { environment } from '../../../environments/environment';
@@ -34,11 +34,14 @@ interface ArticleResponseExtended extends ArticleResponse {
 export class DetailComponent implements OnInit {
   public data$: Observable<ArticleResponseExtended> | undefined;
   public countries$: Observable<Country> | undefined;
+
   public selectedCountry: any;
   public selectedCity: any;
   public selectedHorTab = 1;
   public selectedVerTab = 1;
   public activeIndex = 0;
+  public fullScreen = false;
+  public visibility = false;
   public bodyTypes: any = {
     SEDAN: 'Седан',
     WAGUN: 'Универсал',
@@ -83,5 +86,10 @@ export class DetailComponent implements OnInit {
       rejectIcon: "none",
       rejectButtonStyleClass: "p-button-text",
     });
+  }
+
+  setFullScreen() {
+    this.visibility = true; 
+    this.fullScreen = true;
   }
 }

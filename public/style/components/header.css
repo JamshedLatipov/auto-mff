@@ -41,7 +41,8 @@ header{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	gap: 450px;
+	max-width: 850px;
+	min-width: 550px;
 	border: 1px solid #E0E1E5;
 	border-radius: 3px;
 	padding: 9px 18px 9px 25px;
