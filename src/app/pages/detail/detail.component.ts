@@ -13,6 +13,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
+import { HeaderComponent } from '../../components/header/header.component';
+import { FooterComponent } from '../../components/footer/footer.component';
 
 interface ArticleResponseExtended extends ArticleResponse {
   model: CarModel;
@@ -26,7 +28,7 @@ interface ArticleResponseExtended extends ArticleResponse {
 @Component({
   selector: 'app-detail',
   standalone: true,
-  imports: [GalleriaModule, DropdownModule, CommonModule, FormsModule, ConfirmDialogModule, ToastModule, ButtonModule],
+  imports: [GalleriaModule, DropdownModule, CommonModule, FormsModule, ConfirmDialogModule, ToastModule, ButtonModule, HeaderComponent, FooterComponent],
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
   providers: [ConfirmationService, MessageService]
@@ -89,7 +91,7 @@ export class DetailComponent implements OnInit {
   }
 
   setFullScreen() {
-    this.visibility = true; 
+    this.visibility = true;
     this.fullScreen = true;
   }
 }

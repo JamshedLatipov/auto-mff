@@ -2,9 +2,9 @@
     <header>
         <div class="logo">
             <div class="logoImg">
-                <img src="/img/logo.png" alt="" class='img imgFit'>
+                <img [routerLink]="['/']" src="/img/logo.png" alt="" class='img imgFit'>
             </div>
-            <div class="logoMob">
+            <div class="logoMob" [routerLink]="['/']">
                 <img src="/img/logMob.png" alt="" class="img imgFit">
             </div>
             <span>by PLC Group</span>
@@ -34,8 +34,8 @@
             <i class="fa-solid fa-magnifying-glass" style="color: #878d98;"></i>
         </div>
         <div class="headerBtns">
-            <button class="button buttonPrimary">Поиск автомобиля</button>
-            <button class="button buttonSecondary">Войти</button>
+            <button [routerLink]="['/']" class="button buttonPrimary">Поиск автомобиля</button>
+            <button [routerLink]="['/']" class="button buttonSecondary">Войти</button>
             <i class="fa-solid fa-bars buttonSecondaryAdap" style="color: #383a3f;"></i>
         </div>
         <button class="button buttonSecondary buttonPrimaryAdap">Поиск автомобиля</button>
