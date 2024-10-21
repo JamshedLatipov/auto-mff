@@ -10,8 +10,7 @@
             <span>by PLC Group</span>
         </div>
         <div class="searchBar">
-            <input [formControl]="searchControl" style="width: 100%;" type="text"
-                placeholder='Введите VIN/Номер Лота'>
+            <input [formControl]="searchControl" style="width: 100%;" type="text" placeholder='Введите VIN/Номер Лота'>
             <div *ngIf="results$ | async as results" class="items">
                 <div *ngFor="let item of results.data" class="items-container">
                     <a href="/detail/{{item.id}}">
@@ -38,7 +37,7 @@
             <button [routerLink]="['/']" class="button buttonSecondary">Войти</button>
             <i class="fa-solid fa-bars buttonSecondaryAdap" style="color: #383a3f;"></i>
         </div>
-        <button class="button buttonSecondary buttonPrimaryAdap">Поиск автомобиля</button>
+        <button [routerLink]="['/']" class="button buttonSecondary buttonPrimaryAdap">Поиск автомобиля</button>
         <i class="fa-solid fa-bars buttonSecondaryAdap2" style="color: #383a3f;"></i>
     </header>
     <div class="navBar">
@@ -47,7 +46,9 @@
             <i class="fa-solid fa-envelope" style="color: #c1c2c4;"></i>
             <i class="fa-solid fa-phone" style="color: #c1c2c4;"></i>
             <span>+1 585 282-6777</span>
+            <a style="display: flex; justify-content: flex-start; align-items: center; width: inherit !important;  color: #c1c2c4;" href="https://api.whatsapp.com/send/?phone=15853042303&text&type=phone_number&app_absent=0"> <i class="pi pi-whatsapp " style="font-size: 1.2rem; margin-top: -3px; margin-right: 5px"></i> Whats App</a>
         </div>
+
         <div class="rightNav">
             <i class="fa-solid fa-location-dot" style="color: #fdfefe;"></i>
             <p-dropdown [options]="(countries$ | async)?.data" [(ngModel)]="selectedCountry" optionLabel="name"

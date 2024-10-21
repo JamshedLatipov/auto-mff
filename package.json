@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:auto-front": "node dist/auto-front/server/server.mjs"
+    "serve:ssr:auto-front": "node dist/auto-front/server/server.mjs --ssl"
   },
   "private": true,
   "dependencies": {
@@ -29,6 +29,7 @@
     "flag-icons": "^7.2.3",
     "lodash": "^4.17.21",
     "mdb-angular-ui-kit": "^7.0.0",
+    "primeicons": "^7.0.0",
     "primeng": "^17.18.11",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
