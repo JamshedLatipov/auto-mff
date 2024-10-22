@@ -35,22 +35,24 @@
         <div class="carSlider">
             <i class="flag flag-{{data.city.country.data.attributes.code}}"></i>
             <p-galleria 
+                #gl
                 [value]="data.images" 
-                [containerStyle]="{ 'max-width': '640px' }" 
+                [containerStyle]="{ 'max-width': '640px', background: 'white' }" 
                 [(activeIndex)]="activeIndex"
+                [showItemNavigators]="false"
                 [numVisible]="5">
                     <ng-template pTemplate="item" let-item>
                         <img (click)="setFullScreen()" [src]="item.itemImageSrc" style="width: 100%;" />
                     </ng-template>
                     <ng-template pTemplate="thumbnail" let-item>
-                        <div class="grid grid-nogutter justify-content-center">
-                            <img [src]="item.thumbnailImageSrc" />
-                        </div>
+                        <div  style="width: 104px; height: 62px; margin: 10px 0; background-image: url({{ item.thumbnailImageSrc }}); background-size: cover; border-radius: 5px; background-position: center center;"></div>
                     </ng-template>
                     <ng-template pTemplate="footer" let-item>
                         <div class="custom-galleria-footer">
                             <span *ngIf="data?.images" class="title-container">
-                                <span>{{ activeIndex + 1 }} / {{ data?.images?.length }}</span>
+                               <i style="margin-right: 10px;" (click)="prev()" class="fa-solid fa-chevron-left"></i>
+                               <span>{{ activeIndex + 1 }} / {{ data?.images?.length }}</span>
+                               <i style="margin-left: 10px;" (click)="next()" class="fa-solid fa-chevron-right"></i>
                             </span>
                         </div>
                     </ng-template>
@@ -90,14 +92,19 @@
             <div class="checked">
                 <div class="start">
                     <div class="icon">
-                        <img src="/img/rIcon.svg" alt="" class="img imgFit">
+                        <img [src]="status[data.data.attributes.status].icon" alt="" class="img imgFit">
                     </div>
-                    <span>Заводится и едет</span>
-                    <i class="fa-regular fa-circle-question" style="color: #3c60e0;"></i>
+                    <span>{{ status[data.data.attributes.status].text}}</span>
                 </div>
                 <div class="intact">
-                    <i class="fa-regular fa-circle-check" style="color: #84b156;"></i>
-                    <span>Не поврежден</span>
+                    <img style="width: 20px; height: 20px;" [src]="getDamage(data.data.attributes.damage).icon" [style]="{color: !data.data.attributes.damage ? '#84b156' : 'red'}"/>
+                    <span>{{ getDamage(data.data.attributes.damage).text }}</span>
+                </div>
+            </div>
+            <div class="checked" *ngIf="data.data.attributes.damage">
+                <div class="intact" >
+                    <img style="width: 20px; height: 20px;" src="/img/carIcon.svg"/>
+                    <span style="color: #333">Первичные повреждения <br /> <strong style="font-weight: 700;">{{ data.data.attributes.damage }}</strong></span>
                 </div>
             </div>
             <div class="typeSale">
@@ -105,7 +112,7 @@
                     <div class="icon">
                         <img src="/img/saleType.svg" alt="" class="img imgFit">
                     </div>
-                    <p><span>Вид продажи:</span> По утверждению</p>
+                    <p><span>Вид продажи:</span> Распроданный</p>
                 </div>
                 <div class="doc">
                     <div class="icon">
@@ -119,36 +126,42 @@
                     <div class="icon">
                         <img src="/img/price.svg" alt="" class="img imgFit">
                     </div>
-                    <p><span>Минимальная цена продажи:</span> {{ data.data.attributes.min_price | number }} USD</p>
+                    <p><span>Минимальная цена продажи:</span> {{ data.data.attributes.min_price | number: '' : 'fr-CA'  }} USD</p>
                     <i class="fa-regular fa-circle-question" style="color: #3c60e0;"></i>
                 </div>
                 <div class="allPriceItem">
                     <div class="icon">
                         <img src="/img/price.svg" alt="" class="img imgFit">
                     </div>
-                    <p><span>Средняя цена продажи:</span>{{ data.data.attributes.avg_price | number }} USD</p>
+                    <p><span>Средняя цена продажи:</span>{{ data.data.attributes.avg_price | number: '' : 'fr-CA'  }} USD</p>
                     <i class="fa-regular fa-circle-question" style="color: #3c60e0;"></i>
                 </div>
                 <div class="allPriceItem">
                     <div class="icon">
                         <img src="/img/price.svg" alt="" class="img imgFit">
                     </div>
-                    <p><span>Максимальная цена продажи:</span>{{ data.data.attributes.max_price | number }} USD</p>
+                    <p><span>Максимальная цена продажи:</span>{{ data.data.attributes.max_price | number: '' : 'fr-CA'  }} USD</p>
                     <i class="fa-regular fa-circle-question" style="color: #3c60e0;"></i>
                 </div>
             </div>
             <p class="moreOfCheck">Больше о проверке <i class="fa-solid fa-chevron-right" style="color: #3c60e0;"></i></p>
             <button class="button buttonSecondary" (click)="confirm1($event)">Заказать инспекцию</button>
         </div>
-        <div class="buyBookNow">
-            <h3 class='title'>По утверждению</h3>
+        <div class="buyBookNow" style="padding: 10px;">
+            <h3 class='title'>Распроданный</h3>
             <div class="buy">
-                <h3>Купить сейчас</h3>
-                <p>{{ data.data.attributes.total_sum | number }} USD</p>
+                <h3>{{data.data.attributes.sold_date | date:'dd-MM-YYYY'}}</h3>
+                <p>{{data.data.attributes.sold_date | date:'HH:mm'}} РТ</p>
             </div>
+
+            <div class="buy">
+                <h4 style="font-weight: 600;">Купить сейчас <br /> цена</h4>
+                <p>{{ data.data.attributes.total_sum | number: '' : 'fr-CA'  }} долларов <br /> США</p>
+            </div>
+
             <div class="buttons">
-                <button class="button buttonSecondary" (click)="confirm1($event)">Забронировать</button>
-                <button class="button buttonPrimary" (click)="confirm1($event)">Купить сейчас</button>
+                <button class="button buttonPrimary" (click)="confirm1($event)">Скрыть <br /> информацию</button>
+                <button class="button buttonSecondary" (click)="confirm1($event)">Найти <br /> похожие</button>
             </div>
         </div>
     </div>
@@ -172,7 +185,7 @@
                     <div class="icon">
                         <img src="/img/speedIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p class='notDecor'>Пробег: <span>{{data.data.attributes.milage | number }} км ({{(+data.data.attributes.milage * 1.60934) | number}} миль)</span></p>
+                    <p class='notDecor'>Пробег: <span>{{data.data.attributes.milage | number: '' : 'fr-CA' }} км</span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
@@ -244,7 +257,7 @@
                     <div class="icon">
                         <img src="/img/speedIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p class='notDecor'>Пробег: <span>{{data.data.attributes.milage}} км ({{(+data.data.attributes.milage * 1.60934)}} миль)</span></p>
+                    <p class='notDecor'>Пробег: <span>{{data.data.attributes.milage}} км </span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
@@ -314,7 +327,7 @@
                     <div class="icon">
                         <img src="/img/speedIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p class='notDecor'>Пробег: <span>{{data.data.attributes.milage}} км ({{(+data.data.attributes.milage * 1.60934)}} миль)</span></p>
+                    <p class='notDecor'>Пробег: <span>{{data.data.attributes.milage}} км </span></p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
@@ -431,7 +444,7 @@
             <div class="right">
                 <div class="costCar">
                     <h4>Цена автомобиля</h4>
-                    <span>{{ data.data.attributes.total_sum | number }} USD</span>
+                    <span>{{ data.data.attributes.total_sum | number: '' : 'fr-CA' }} USD</span>
                 </div>
                 <div class="costCar">
                     <h4>Стоимость доставки</h4>
@@ -449,7 +462,7 @@
         </div>
         <div class="totalPrice">
             <span>Общая сумма</span>
-            <span>{{ data.data.attributes.total_sum | number }} USD</span>
+            <span>{{ data.data.attributes.total_sum | number: '' : 'fr-CA'  }} USD</span>
         </div>
     </div>
     <div class="askQuestion">
@@ -462,7 +475,7 @@
     <div class="buyNow">
         <h2>Вы можете купить это автомобиль прямо сейчас!</h2>
         <div class="btns">
-            <button class="button buttonPrimary" (click)="confirm1($event)">Купить сейчас: {{ data.data.attributes.total_sum | number }} USD</button>
+            <button class="button buttonPrimary" (click)="confirm1($event)">Купить сейчас: {{ data.data.attributes.total_sum | number: '' : 'fr-CA'  }} USD</button>
             <button class="button buttonSecondary" (click)="confirm1($event)">Забронировать</button>
         </div>
     </div>
@@ -578,7 +591,7 @@
     <div class="buyNow">
         <h2>Вы можете купить это автомобиль прямо сейчас!</h2>
         <div class="btns">
-            <button class="button buttonPrimary" (click)="confirm1($event)">Купить сейчас: {{ data.data.attributes.total_sum | number }} USD</button>
+            <button class="button buttonPrimary" (click)="confirm1($event)">Купить сейчас: {{ data.data.attributes.total_sum | number: '' : 'fr-CA'  }} USD</button>
             <button class="button buttonSecondary" (click)="confirm1($event)">Забронировать</button>
         </div>
     </div>
@@ -611,7 +624,7 @@
         <p>
             На данный момент стоимость лота составляет 0 USD, 
             однако она может изменяться с появлением новых ставок на аукционе. 
-            Также данный автомобиль можно выкупить без участие в аукционе по цене {{ data.data.attributes.total_sum | number }} USD. 
+            Также данный автомобиль можно выкупить без участие в аукционе по цене {{ data.data.attributes.total_sum | number: '' : 'fr-CA'  }} USD. 
             Окончательная цена автомобиля или цена «под ключ», формируется с учетом стоимости его доставки к заказчику, 
             расходов на оформление документов, сборов аукцион
         </p>

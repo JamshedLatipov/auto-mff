@@ -36,6 +36,9 @@ export interface Article {
   images: Data<Data<Image[]>>[];
   car_model: Data<CarModel>
   city: Data<City>
+  damage: string;
+  sold_date: string;
+  
 }
 
 export interface Description {

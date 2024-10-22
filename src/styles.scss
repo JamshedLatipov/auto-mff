@@ -6,3 +6,13 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.p-galleria .p-galleria-thumbnail-container {
+    background: transparent !important;
+}
+.p-element.p-galleria-thumbnails-bottom.p-galleria.p-component {
+    background: transparent !important;
+}
+
+p-galleriaitem img {
+    border-radius: 5px;
+}
