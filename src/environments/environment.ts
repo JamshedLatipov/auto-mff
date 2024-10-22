@@ -1,3 +1,3 @@
 export const environment = {
-    backUrl: 'http://plc-auction.online:1337',
+    backUrl: 'https://plc-auction.online',
 };
