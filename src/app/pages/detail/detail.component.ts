@@ -62,6 +62,7 @@ export class DetailComponent implements OnInit {
     HATCHBACK: 'Хаджбэк',
     MINIVAN: 'Минивен',
     PICKUP: 'Пикап',
+    CROSSOVER: 'Кроссовер',
   }
   public transmision: any = {
     AUTO: 'Автоматическая',
