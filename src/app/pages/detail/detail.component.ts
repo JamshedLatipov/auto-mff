@@ -1,4 +1,4 @@
-import { Component, computed, effect, OnInit, signal, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, computed, effect, OnInit, signal, ViewChild } from '@angular/core';
 import { Galleria, GalleriaModule } from 'primeng/galleria';
 import { ArticleService } from '../../services/article.service';
 import { Observable } from 'rxjs';
@@ -16,6 +16,7 @@ import { ButtonModule } from 'primeng/button';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { Title } from '@angular/platform-browser';
+import _ from 'lodash';
 
 interface ArticleResponseExtended extends ArticleResponse {
   model: CarModel;
@@ -26,6 +27,39 @@ interface ArticleResponseExtended extends ArticleResponse {
   }[];
 }
 
+const DEFAULT_CITY = {
+  "name": "Dushanbe",
+  "createdAt": "2024-10-24T12:27:09.762Z",
+  "updatedAt": "2024-10-24T12:28:07.197Z",
+  "publishedAt": "2024-10-24T12:28:07.194Z",
+  "country": {
+    "data": {
+      "id": 3,
+      "attributes": {
+        "name": "Tajikistan",
+        "code": "tajikistan",
+        "createdAt": "2024-10-24T12:26:45.305Z",
+        "updatedAt": "2024-10-24T12:26:48.205Z",
+        "publishedAt": "2024-10-24T12:26:48.202Z",
+        "delivery": "850"
+      }
+    }
+  }
+};
+
+const DEFAULT_COUNTRY = {
+  attributes: {
+    name: "Tajikistan",
+    code: "tajikistan",
+    delivery: 850,
+    cities: {
+      data: [
+        {attributes: DEFAULT_CITY}
+      ]
+    },
+  }
+};
+
 @Component({
   selector: 'app-detail',
   standalone: true,
@@ -34,12 +68,13 @@ interface ArticleResponseExtended extends ArticleResponse {
   styleUrls: ['./detail.component.scss'],
   providers: [ConfirmationService, MessageService]
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, AfterViewInit {
   public data$: Observable<ArticleResponseExtended> | undefined;
   public countries$: Observable<Country> | undefined;
 
-  public selectedCountry: any;
-  public selectedCity: any;
+  public selectedCountry: any = DEFAULT_COUNTRY;
+
+  public selectedCity: any = {attributes: DEFAULT_CITY};
   public selectedHorTab = 1;
   public selectedVerTab = 1;
   public _activeIndex = 0;
@@ -56,6 +91,10 @@ export class DetailComponent implements OnInit {
     }
   }
   public bodyTypes: any = {
+    LIFT_BACK: 'Лифтбек',
+    CABRIOLET: 'Кабриолет',
+    LIMOUSIN: 'Лимузин',
+    OFF_ROAD: 'Внедорожник',
     SEDAN: 'Седан',
     WAGUN: 'Универсал',
     COUPE: 'Купе',
@@ -80,7 +119,19 @@ export class DetailComponent implements OnInit {
     }
   }
 
-  constructor(private articleService: ArticleService, private activatedRoute: ActivatedRoute, private confirmationService: ConfirmationService, private messageService: MessageService, private title: Title) { }
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private articleService: ArticleService, private activatedRoute: ActivatedRoute, private confirmationService: ConfirmationService, private messageService: MessageService, private title: Title) { }
+
+  ngAfterViewInit(): void {
+    this.countries$ = this.articleService.getCountries().pipe(map(c => {
+      c.data.unshift(DEFAULT_COUNTRY as any);
+
+      c.data = _.uniqBy(c.data, (a) => a.attributes.code);
+      return c;
+    }));
+    this.cdr.detectChanges();
+  }
 
   getDamage(value: string): { text: string, icon: string } {
     return !value ? {
@@ -100,7 +151,7 @@ export class DetailComponent implements OnInit {
           model: data.data?.attributes.car_model.data.attributes,
           city: data.data.attributes.city.data.attributes,
           images: (data.data.attributes?.images as any).data.map((image: any) => image?.attributes).map((image: Image) => ({
-            itemImageSrc: environment.backUrl + image.url,
+            itemImageSrc: environment.backUrl + (image?.formats?.large?.url || image?.url),
             thumbnailImageSrc: environment.backUrl + image.formats.thumbnail.url
           }))
         };
@@ -109,8 +160,6 @@ export class DetailComponent implements OnInit {
         return mutatedData
       }),
     );
-
-    this.countries$ = this.articleService.getCountries();
   }
 
   clearCity() {
@@ -135,10 +184,10 @@ export class DetailComponent implements OnInit {
   }
 
   next() {
-      this.activeIndex++;
+    this.activeIndex++;
   }
 
   prev() {
-      this.activeIndex--;
+    this.activeIndex--;
   }
 }
