@@ -1,1 +1,5 @@
-Allow: /detail/* 
+User-agent: *
+
+Disallow: /
+
+Sitemap: https://plc-auction.online/api/sitemap/index.xml
