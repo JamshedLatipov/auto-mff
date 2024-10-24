@@ -51,13 +51,13 @@
 
         <div class="rightNav">
             <i class="fa-solid fa-location-dot" style="color: #fdfefe;"></i>
-            <p-dropdown [options]="(countries$ | async)?.data" [(ngModel)]="selectedCountry" optionLabel="name"
+            <p-dropdown [options]="countries?.data" [formControl]="countryControl" optionLabel="name"
                 [style]="{width: '100%', background: 'transparent'}">
                 <ng-template pTemplate="selectedItem">
                     <div style="color: white !important; display: flex; align-items: center;" class="selectedItem"
-                        *ngIf="selectedCountry">
-                        <i class="flag flag-{{selectedCountry?.attributes?.code}}"></i>
-                        <div>{{ selectedCountry?.attributes?.name }}</div>
+                        *ngIf="this.countryControl.value">
+                        <i class="flag flag-{{this.countryControl.value?.attributes?.code}}"></i>
+                        <div>{{ this.countryControl.value?.attributes?.name }}</div>
                     </div>
                 </ng-template>
                 <ng-template let-country pTemplate="item">

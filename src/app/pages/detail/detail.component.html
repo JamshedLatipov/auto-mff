@@ -450,19 +450,11 @@
                     <h4>Стоимость доставки</h4>
                     <span>{{ selectedCountry && selectedCity ? selectedCountry?.attributes.delivery || 0: 0 }} USD</span>
                 </div>
-                <div class="costCar">
-                    <h4>Плата за услуги аукциона PLC</h4>
-                    <span>300 USD</span>
-                </div>
-                <div class="costCar">
-                    <h4>Таможенно-брокерские услуги</h4>
-                    <span>380 USD</span>
-                </div>
             </div>
         </div>
         <div class="totalPrice">
             <span>Общая сумма</span>
-            <span>{{ data.data.attributes.total_sum | number: '' : 'fr-CA'  }} USD</span>
+            <span>{{ (+selectedCountry?.attributes.delivery || 0) + (+data.data.attributes.total_sum || 0) | number: '' : 'fr-CA'  }} USD</span>
         </div>
     </div>
     <div class="askQuestion">
