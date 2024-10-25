@@ -16,6 +16,7 @@ export interface Article {
   name: string
   description: Description[]
   year: number
+  whill_drive: string;
   status: string
   min_price: number
   max_price: number
