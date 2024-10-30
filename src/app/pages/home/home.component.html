@@ -1,0 +1,11 @@
+<div *ngIf="list$ | async as list">
+    <a *ngFor="let i of list?.data; let index = index" [href]="'detail/'" class="article"
+        [href]="'/detail/' + i.attributes.vin">{{ i.attributes |
+        json}}</a>
+
+    <!-- <a *ngFor="let i of list?.data; let index = index" [href]="'detail/'" class="article" href=""></a> -->
+
+    <a class="paging" *ngFor="let i of list?.meta?.pagination?.pageList; let index = index"
+        [href]="'?page='+ (index + 1)">{{index +
+        1}}</a>
+</div>

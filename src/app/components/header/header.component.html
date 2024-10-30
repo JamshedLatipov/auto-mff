@@ -2,9 +2,9 @@
     <header>
         <div class="logo">
             <div class="logoImg">
-                <img [routerLink]="['/']" src="/img/logo.png" alt="" class='img imgFit'>
+                <img (click)="goToHome()" src="/img/logo.png" alt="" class='img imgFit'>
             </div>
-            <div class="logoMob" [routerLink]="['/']">
+            <div class="logoMob" (click)="goToHome()">
                 <img src="/img/logMob.png" alt="" class="img imgFit">
             </div>
             <span>by PLC Group</span>
@@ -33,11 +33,12 @@
             <i class="fa-solid fa-magnifying-glass" style="color: #878d98;"></i>
         </div>
         <div class="headerBtns">
-            <button [routerLink]="['/']" class="button buttonPrimary">Поиск автомобиля</button>
-            <button [routerLink]="['/']" class="button buttonSecondary">Войти</button>
+            <button (click)="goToHome()" class="button buttonPrimary">Поиск автомобиля</button>
+            <button (click)="goToHome()" class="button buttonSecondary">Войти</button>
             <i class="fa-solid fa-bars buttonSecondaryAdap" style="color: #383a3f;"></i>
         </div>
-        <button [routerLink]="['/']" class="button buttonSecondary buttonPrimaryAdap">Поиск автомобиля</button>
+        <button (click)="goToHome()" class="button buttonSecondary buttonPrimaryAdap">Поиск
+            автомобиля</button>
         <i class="fa-solid fa-bars buttonSecondaryAdap2" style="color: #383a3f;"></i>
     </header>
     <div class="navBar">
@@ -46,7 +47,10 @@
             <i class="fa-solid fa-envelope" style="color: #c1c2c4;"></i>
             <i class="fa-solid fa-phone" style="color: #c1c2c4;"></i>
             <span>+1 585 282-6777</span>
-            <a style="display: flex; justify-content: flex-start; align-items: center; width: inherit !important;  color: #c1c2c4;" href="https://api.whatsapp.com/send/?phone=15853042303&text&type=phone_number&app_absent=0"> <i class="pi pi-whatsapp " style="font-size: 1.2rem; margin-top: -3px; margin-right: 5px"></i> Whats App</a>
+            <a style="display: flex; justify-content: flex-start; align-items: center; width: inherit !important;  color: #c1c2c4;"
+                href="https://api.whatsapp.com/send/?phone=15853042303&text&type=phone_number&app_absent=0"> <i
+                    class="pi pi-whatsapp " style="font-size: 1.2rem; margin-top: -3px; margin-right: 5px"></i> Whats
+                App</a>
         </div>
 
         <div class="rightNav">

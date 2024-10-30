@@ -17,6 +17,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { Title } from '@angular/platform-browser';
 import _ from 'lodash';
+import { Meta } from '@angular/platform-browser';
 
 interface ArticleResponseExtended extends ArticleResponse {
   model: CarModel;
@@ -54,7 +55,7 @@ const DEFAULT_COUNTRY = {
     delivery: 850,
     cities: {
       data: [
-        {attributes: DEFAULT_CITY}
+        { attributes: DEFAULT_CITY }
       ]
     },
   }
@@ -74,7 +75,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
 
   public selectedCountry: any = DEFAULT_COUNTRY;
 
-  public selectedCity: any = {attributes: DEFAULT_CITY};
+  public selectedCity: any = { attributes: DEFAULT_CITY };
   public selectedHorTab = 1;
   public selectedVerTab = 1;
   public _activeIndex = 0;
@@ -121,6 +122,7 @@ export class DetailComponent implements OnInit, AfterViewInit {
 
   constructor(
     private cdr: ChangeDetectorRef,
+    private meta: Meta,
     private articleService: ArticleService, private activatedRoute: ActivatedRoute, private confirmationService: ConfirmationService, private messageService: MessageService, private title: Title) { }
 
   ngAfterViewInit(): void {
@@ -157,6 +159,8 @@ export class DetailComponent implements OnInit, AfterViewInit {
         };
         this.images = mutatedData.images;
         this.title.setTitle(`${mutatedData.model.manufactor.data.attributes.name} ${mutatedData.model.name} ${mutatedData.data.attributes.year} from ${mutatedData.city.country.data.attributes.name} ${mutatedData.data.attributes.vin}`)
+        this.meta.addTag({ name: 'description', content: `${mutatedData.model.manufactor.data.attributes.name} ${mutatedData.model.name} ${mutatedData.data.attributes.year} from ${mutatedData.city.country.data.attributes.name} ${mutatedData.data.attributes.vin}` });
+        this.meta.addTag({ name: 'keywords', content: `${mutatedData.model.manufactor.data.attributes.name},${mutatedData.model.name},${mutatedData.data.attributes.year},from ${mutatedData.city.country.data.attributes.name},${mutatedData.data.attributes.vin}` });
         return mutatedData
       }),
     );

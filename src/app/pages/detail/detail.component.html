@@ -19,12 +19,12 @@
             </div>
         </div>
         <div class="share">
-            <i class="fa-solid fa-share-nodes" ></i>
+            <i class="fa-solid fa-share-nodes"></i>
         </div>
         <div class="carNameAdap">
             <h1>{{data.model.manufactor.data.attributes.name}} {{data.model.name}}, {{data.data.attributes.year}}</h1>
             <div class="shareAdap">
-                <i class="fa-solid fa-share-nodes" ></i>
+                <i class="fa-solid fa-share-nodes"></i>
             </div>
         </div>
         <p class='titleAdap'><span>Автомобиль</span> {{data.data.attributes.lot_number}}</p>
@@ -34,52 +34,43 @@
         <!-- Info: this shit shouldn't be used :) fuck that :) -->
         <div class="carSlider">
             <i class="flag flag-{{data.city.country.data.attributes.code}}"></i>
-            <p-galleria 
-                #gl
-                [value]="data.images" 
-                [containerStyle]="{ 'max-width': '640px', background: 'white' }" 
-                [(activeIndex)]="activeIndex"
-                [showItemNavigators]="false"
-                [numVisible]="5">
-                    <ng-template pTemplate="item" let-item>
-                        <img (click)="setFullScreen()" [src]="item.itemImageSrc" style="width: 100%;" />
-                    </ng-template>
-                    <ng-template pTemplate="thumbnail" let-item>
-                        <div  style="width: 104px; height: 62px; margin: 10px 0; background-image: url({{ item.thumbnailImageSrc }}); background-size: cover; border-radius: 5px; background-position: center center;"></div>
-                    </ng-template>
-                    <ng-template pTemplate="footer" let-item>
-                        <div class="custom-galleria-footer">
-                            <span *ngIf="data?.images" class="title-container">
-                               <i style="margin-right: 10px;" (click)="prev()" class="fa-solid fa-chevron-left"></i>
-                               <span>{{ activeIndex + 1 }} / {{ data?.images?.length }}</span>
-                               <i style="margin-left: 10px;" (click)="next()" class="fa-solid fa-chevron-right"></i>
-                            </span>
-                        </div>
-                    </ng-template>
+            <p-galleria #gl [value]="data.images" [containerStyle]="{ 'max-width': '640px', background: 'white' }"
+                [(activeIndex)]="activeIndex" [showItemNavigators]="false" [numVisible]="5">
+                <ng-template pTemplate="item" let-item>
+                    <img (click)="setFullScreen()" [src]="item.itemImageSrc" style="width: 100%;" />
+                </ng-template>
+                <ng-template pTemplate="thumbnail" let-item>
+                    <div
+                        style="width: 104px; height: 62px; margin: 10px 0; background-image: url({{ item.thumbnailImageSrc }}); background-size: cover; border-radius: 5px; background-position: center center;">
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="footer" let-item>
+                    <div class="custom-galleria-footer">
+                        <span *ngIf="data?.images" class="title-container">
+                            <i style="margin-right: 10px;" (click)="prev()" class="fa-solid fa-chevron-left"></i>
+                            <span>{{ activeIndex + 1 }} / {{ data?.images?.length }}</span>
+                            <i style="margin-left: 10px;" (click)="next()" class="fa-solid fa-chevron-right"></i>
+                        </span>
+                    </div>
+                </ng-template>
             </p-galleria>
-            <p-galleria 
-                *ngIf="visibility"
-                [value]="data.images" 
-                [containerStyle]="{ 'max-width': '640px' }" 
-                [(activeIndex)]="activeIndex"
-                [(visible)]="visibility"
-                [fullScreen]="fullScreen"
-                [numVisible]="5">
-                    <ng-template pTemplate="item" let-item>
-                        <img [src]="item.itemImageSrc" style="width: 100%;" />
-                    </ng-template>
-                    <ng-template pTemplate="thumbnail" let-item>
-                        <div class="grid grid-nogutter justify-content-center">
-                            <img [src]="item.thumbnailImageSrc" />
-                        </div>
-                    </ng-template>
-                    <ng-template pTemplate="footer" let-item>
-                        <div class="custom-galleria-footer">
-                            <span *ngIf="data?.images" class="title-container">
-                                <span>{{ activeIndex + 1 }} / {{ data?.images?.length }}</span>
-                            </span>
-                        </div>
-                    </ng-template>
+            <p-galleria *ngIf="visibility" [value]="data.images" [containerStyle]="{ 'max-width': '640px' }"
+                [(activeIndex)]="activeIndex" [(visible)]="visibility" [fullScreen]="fullScreen" [numVisible]="5">
+                <ng-template pTemplate="item" let-item>
+                    <img [src]="item.itemImageSrc" style="width: 100%;" />
+                </ng-template>
+                <ng-template pTemplate="thumbnail" let-item>
+                    <div class="grid grid-nogutter justify-content-center">
+                        <img [src]="item.thumbnailImageSrc" />
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="footer" let-item>
+                    <div class="custom-galleria-footer">
+                        <span *ngIf="data?.images" class="title-container">
+                            <span>{{ activeIndex + 1 }} / {{ data?.images?.length }}</span>
+                        </span>
+                    </div>
+                </ng-template>
             </p-galleria>
         </div>
         <div class="orderInspect">
@@ -87,7 +78,7 @@
                 <div class="icon">
                     <img src="/img/gps.svg" alt="" class='img imgFit'>
                 </div>
-                <p><span>Место расположения:</span>  {{data.city.country.data.attributes.name}},  {{data.city.name}}</p>
+                <p><span>Место расположения:</span> {{data.city.country.data.attributes.name}}, {{data.city.name}}</p>
             </div>
             <div class="checked">
                 <div class="start">
@@ -97,14 +88,16 @@
                     <span>{{ status[data.data.attributes.status].text}}</span>
                 </div>
                 <div class="intact">
-                    <img style="width: 20px; height: 20px;" [src]="getDamage(data.data.attributes.damage).icon" [style]="{color: !data.data.attributes.damage ? '#84b156' : 'red'}"/>
+                    <img style="width: 20px; height: 20px;" [src]="getDamage(data.data.attributes.damage).icon"
+                        [style]="{color: !data.data.attributes.damage ? '#84b156' : 'red'}" />
                     <span>{{ getDamage(data.data.attributes.damage).text }}</span>
                 </div>
             </div>
             <div class="checked" *ngIf="data.data.attributes.damage">
-                <div class="intact" >
-                    <img style="width: 20px; height: 20px;" src="/img/carIcon.svg"/>
-                    <span style="color: #333">Первичные повреждения <br /> <strong style="font-weight: 700;">{{ data.data.attributes.damage }}</strong></span>
+                <div class="intact">
+                    <img style="width: 20px; height: 20px;" src="/img/carIcon.svg" />
+                    <span style="color: #333">Первичные повреждения <br /> <strong style="font-weight: 700;">{{
+                            data.data.attributes.damage }}</strong></span>
                 </div>
             </div>
             <div class="typeSale">
@@ -126,25 +119,29 @@
                     <div class="icon">
                         <img src="/img/price.svg" alt="" class="img imgFit">
                     </div>
-                    <p><span>Минимальная цена продажи:</span> {{ data.data.attributes.min_price | number: '' : 'fr-CA'  }} USD</p>
+                    <p><span>Минимальная цена продажи:</span> {{ data.data.attributes.min_price | number: '' : 'fr-CA'
+                        }} USD</p>
                     <i class="fa-regular fa-circle-question" style="color: #3c60e0;"></i>
                 </div>
                 <div class="allPriceItem">
                     <div class="icon">
                         <img src="/img/price.svg" alt="" class="img imgFit">
                     </div>
-                    <p><span>Средняя цена продажи:</span>{{ data.data.attributes.avg_price | number: '' : 'fr-CA'  }} USD</p>
+                    <p><span>Средняя цена продажи:</span>{{ data.data.attributes.avg_price | number: '' : 'fr-CA' }} USD
+                    </p>
                     <i class="fa-regular fa-circle-question" style="color: #3c60e0;"></i>
                 </div>
                 <div class="allPriceItem">
                     <div class="icon">
                         <img src="/img/price.svg" alt="" class="img imgFit">
                     </div>
-                    <p><span>Максимальная цена продажи:</span>{{ data.data.attributes.max_price | number: '' : 'fr-CA'  }} USD</p>
+                    <p><span>Максимальная цена продажи:</span>{{ data.data.attributes.max_price | number: '' : 'fr-CA'
+                        }} USD</p>
                     <i class="fa-regular fa-circle-question" style="color: #3c60e0;"></i>
                 </div>
             </div>
-            <p class="moreOfCheck">Больше о проверке <i class="fa-solid fa-chevron-right" style="color: #3c60e0;"></i></p>
+            <p class="moreOfCheck">Больше о проверке <i class="fa-solid fa-chevron-right" style="color: #3c60e0;"></i>
+            </p>
             <button class="button buttonSecondary" (click)="confirm1($event)">Заказать инспекцию</button>
         </div>
         <div class="buyBookNow" style="padding: 10px;">
@@ -156,7 +153,7 @@
 
             <div class="buy">
                 <h4 style="font-weight: 600;">Купить сейчас <br /> цена</h4>
-                <p>{{ data.data.attributes.total_sum | number: '' : 'fr-CA'  }} долларов <br /> США</p>
+                <p>{{ data.data.attributes.total_sum | number: '' : 'fr-CA' }} долларов <br /> США</p>
             </div>
 
             <div class="buttons">
@@ -185,7 +182,8 @@
                     <div class="icon">
                         <img src="/img/speedIcon.svg" alt="" class="img imgFit">
                     </div>
-                    <p class='notDecor'>Пробег: <span>{{data.data.attributes.milage | number: '' : 'fr-CA' }} км</span></p>
+                    <p class='notDecor'>Пробег: <span>{{data.data.attributes.milage | number: '' : 'fr-CA' }} км</span>
+                    </p>
                 </div>
                 <div class="featuresItem">
                     <div class="icon">
@@ -387,52 +385,44 @@
                 <div class="detailDel">
                     <h4>Детали доставки</h4>
                     <p>
-                        Обратите внимание, что на данном этапе 
-                        мы рассчитываем примерную стоимость доставки, 
+                        Обратите внимание, что на данном этапе
+                        мы рассчитываем примерную стоимость доставки,
                         и при оформлении покупки и доставки она может незначительно отличаться.
                     </p>
                 </div>
                 <div class="selectDel">
                     <label for="countryDel">Выберите страну доставки</label>
                     <div class="dropdown" *ngIf="(countries$ | async) as countries">
-                        <p-dropdown 
-                            [options]="countries.data" 
-                            [(ngModel)]="selectedCountry"
-                            optionLabel="name"
-                            placeholder="Выберите страну доставки"
-                            [style]="{width: '100%'}">
-                                <ng-template pTemplate="selectedItem">
-                                    <div class="selectedItem" *ngIf="selectedCountry">
-                                        <i class="flag flag-{{selectedCountry.attributes.code}}"></i>
-                                        <div>{{ selectedCountry.attributes.name }}</div>
-                                    </div>
-                                </ng-template>
-                                <ng-template let-country pTemplate="item">
-                                    <div class="selectedItem" (click)="clearCity()">
-                                        <i class="flag flag-{{country.attributes.code}}"></i>
-                                        <div>{{ country.attributes.name }}</div>
-                                    </div>
-                                </ng-template>
+                        <p-dropdown [options]="countries.data" [(ngModel)]="selectedCountry" optionLabel="name"
+                            placeholder="Выберите страну доставки" [style]="{width: '100%'}">
+                            <ng-template pTemplate="selectedItem">
+                                <div class="selectedItem" *ngIf="selectedCountry">
+                                    <i class="flag flag-{{selectedCountry.attributes.code}}"></i>
+                                    <div>{{ selectedCountry.attributes.name }}</div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-country pTemplate="item">
+                                <div class="selectedItem" (click)="clearCity()">
+                                    <i class="flag flag-{{country.attributes.code}}"></i>
+                                    <div>{{ country.attributes.name }}</div>
+                                </div>
+                            </ng-template>
                         </p-dropdown>
                     </div>
                     <label for="cityDel">Выберите город или порт доставки</label>
                     <div class="dropdown" *ngIf="(countries$ | async) as countries">
-                        <p-dropdown 
-                            [options]="selectedCountry?.attributes?.cities?.data" 
-                            [(ngModel)]="selectedCity"
-                            optionLabel="name"
-                            placeholder="Выберите страну доставки"
-                            [style]="{width: '100%'}">
-                                <ng-template pTemplate="selectedItem">
-                                    <div class="selectedItem" *ngIf="selectedCity">
-                                        <div>{{ selectedCity?.attributes?.name }}</div>
-                                    </div>
-                                </ng-template>
-                                <ng-template let-city pTemplate="item">
-                                    <div class="selectedItem">
-                                        <div>{{ city.attributes.name }}</div>
-                                    </div>
-                                </ng-template>
+                        <p-dropdown [options]="selectedCountry?.attributes?.cities?.data" [(ngModel)]="selectedCity"
+                            optionLabel="name" placeholder="Выберите страну доставки" [style]="{width: '100%'}">
+                            <ng-template pTemplate="selectedItem">
+                                <div class="selectedItem" *ngIf="selectedCity">
+                                    <div>{{ selectedCity?.attributes?.name }}</div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-city pTemplate="item">
+                                <div class="selectedItem">
+                                    <div>{{ city.attributes.name }}</div>
+                                </div>
+                            </ng-template>
                         </p-dropdown>
                     </div>
                     <p>
@@ -447,14 +437,31 @@
                     <span>{{ data.data.attributes.total_sum | number: '' : 'fr-CA' }} USD</span>
                 </div>
                 <div class="costCar">
+                    <h4>Аукционный сбор</h4>
+                    <span>319 USD</span>
+                </div>
+                <div class="costCar">
                     <h4>Стоимость доставки</h4>
-                    <span>{{ selectedCountry && selectedCity ? selectedCountry?.attributes.delivery || 0: 0 }} USD</span>
+                    <span>0 USD</span>
+                </div>
+                <div class="costCar">
+                    <h4>Услуги PLC Auction</h4>
+                    <span>300 USD</span>
+                </div>
+                <div class="costCar">
+                    <h4>Сборы за документацию</h4>
+                    <span>150 USD</span>
+                </div>
+                <div class="costCar">
+                    <h4>Плата за погрузку</h4>
+                    <span>150 USD</span>
                 </div>
             </div>
         </div>
         <div class="totalPrice">
             <span>Общая сумма</span>
-            <span>{{ (+selectedCountry?.attributes.delivery || 0) + (+data.data.attributes.total_sum || 0) | number: '' : 'fr-CA'  }} USD</span>
+            <span>{{ (319 + 300 + 150 + 150) + (+data.data.attributes.total_sum || 0) | number: ''
+                : 'fr-CA' }} USD</span>
         </div>
     </div>
     <div class="askQuestion">
@@ -462,20 +469,25 @@
             <p>Если у вас есть вопросы, пожалуйста, свяжитесь с нами.</p>
             <p>Наши менеджеры ответят на все ваши вопросы в ближайшее время.</p>
         </div>
-        <button class="button buttonSecondary"> Задать вопрос <i class="fa-regular fa-comment-dots" style="color: #b94141;"></i></button>
+        <button class="button buttonSecondary"> Задать вопрос <i class="fa-regular fa-comment-dots"
+                style="color: #b94141;"></i></button>
     </div>
     <div class="buyNow">
         <h2>Вы можете купить это автомобиль прямо сейчас!</h2>
         <div class="btns">
-            <button class="button buttonPrimary" (click)="confirm1($event)">Купить сейчас: {{ data.data.attributes.total_sum | number: '' : 'fr-CA'  }} USD</button>
+            <button class="button buttonPrimary" (click)="confirm1($event)">Купить сейчас: {{
+                data.data.attributes.total_sum | number: '' : 'fr-CA' }} USD</button>
             <button class="button buttonSecondary" (click)="confirm1($event)">Забронировать</button>
         </div>
     </div>
     <div class="tabs">
         <div class="tab-header">
-            <div class="tab-item" [class.active]="selectedHorTab === 1" (click)="selectedHorTab = 1">Комфорт и удобство</div>
-            <div class="tab-item" [class.active]="selectedHorTab === 2" (click)="selectedHorTab = 2">Развлечения и мультимедиа</div>
-            <div class="tab-item" [class.active]="selectedHorTab === 3" (click)="selectedHorTab = 3">Безопасность и охрана</div>
+            <div class="tab-item" [class.active]="selectedHorTab === 1" (click)="selectedHorTab = 1">Комфорт и удобство
+            </div>
+            <div class="tab-item" [class.active]="selectedHorTab === 2" (click)="selectedHorTab = 2">Развлечения и
+                мультимедиа</div>
+            <div class="tab-item" [class.active]="selectedHorTab === 3" (click)="selectedHorTab = 3">Безопасность и
+                охрана</div>
         </div>
         <div class="tab-content" [class.active]="selectedHorTab === 1" id="tab-1">
             <ul>
@@ -529,9 +541,10 @@
         </div>
     </div>
     <div class="tabsAdap">
-        <div class="tab-item-adap"  (click)="selectedVerTab = 1">
+        <div class="tab-item-adap" (click)="selectedVerTab = 1">
             <span>Комфорт и удобство</span>
-            <i  [class]="{'fa-chevron-down': selectedVerTab !== 1, 'fa-chevron-up': selectedVerTab === 1}" class="fas"></i>
+            <i [class]="{'fa-chevron-down': selectedVerTab !== 1, 'fa-chevron-up': selectedVerTab === 1}"
+                class="fas"></i>
         </div>
         <div class="tab-content-adap" id="tabAdap-1" [class.active]="selectedVerTab === 1">
             <ul>
@@ -545,7 +558,8 @@
         </div>
         <div class="tab-item-adap" data-tab="tabAdap-2" (click)="selectedVerTab = 2">
             <span>Развлечения и мультимедиа</span>
-            <i [class]="{'fa-chevron-down': selectedVerTab !== 2, 'fa-chevron-up': selectedVerTab === 2}" class="fas"></i>
+            <i [class]="{'fa-chevron-down': selectedVerTab !== 2, 'fa-chevron-up': selectedVerTab === 2}"
+                class="fas"></i>
         </div>
         <div class="tab-content-adap" id="tabAdap-2" [class.active]="selectedVerTab === 2">
             <ul>
@@ -559,7 +573,8 @@
         </div>
         <div class="tab-item-adap" data-tab="tabAdap-3" (click)="selectedVerTab = 3">
             <span>Безопасность и охрана</span>
-            <i [class]="{'fa-chevron-down': selectedVerTab !== 3, 'fa-chevron-up': selectedVerTab === 3}" class="fas"></i>
+            <i [class]="{'fa-chevron-down': selectedVerTab !== 3, 'fa-chevron-up': selectedVerTab === 3}"
+                class="fas"></i>
         </div>
         <div class="tab-content-adap" id="tabAdap-3" [class.active]="selectedVerTab === 3">
             <ul>
@@ -583,7 +598,8 @@
     <div class="buyNow">
         <h2>Вы можете купить это автомобиль прямо сейчас!</h2>
         <div class="btns">
-            <button class="button buttonPrimary" (click)="confirm1($event)">Купить сейчас: {{ data.data.attributes.total_sum | number: '' : 'fr-CA'  }} USD</button>
+            <button class="button buttonPrimary" (click)="confirm1($event)">Купить сейчас: {{
+                data.data.attributes.total_sum | number: '' : 'fr-CA' }} USD</button>
             <button class="button buttonSecondary" (click)="confirm1($event)">Забронировать</button>
         </div>
     </div>
@@ -592,16 +608,19 @@
             <p>Если у вас есть вопросы, пожалуйста, свяжитесь с нами.</p>
             <p>Наши менеджеры ответят на все ваши вопросы в ближайшее время.</p>
         </div>
-        <button class="button buttonSecondary"> Задать вопрос <i class="fa-regular fa-comment-dots" style="color: #b94141;"></i></button>
+        <button class="button buttonSecondary"> Задать вопрос <i class="fa-regular fa-comment-dots"
+                style="color: #b94141;"></i></button>
     </div>
     <div class="addFeatures">
         <h2 class='title'>Дополнительные характеристики</h2>
         <p class='desk'>
-            Вашему вниманию представлен бу автомобиль {{data.model.manufactor.data.attributes.name}} {{data.model.name}} {{data.data.attributes.year}} года выпуска., 
-            купить который вы можете с помощью одной из самых крупных компаний по доставке 
+            Вашему вниманию представлен бу автомобиль {{data.model.manufactor.data.attributes.name}} {{data.model.name}}
+            {{data.data.attributes.year}} года выпуска.,
+            купить который вы можете с помощью одной из самых крупных компаний по доставке
             подержанных авто – PLC Auctions.
         </p>
-        <h2>Основные характеристики автомобиля {{data.model.manufactor.data.attributes.name}} {{data.model.name}} {{data.data.attributes.year}} из {{data.city.country.data.attributes.name}}</h2>
+        <h2>Основные характеристики автомобиля {{data.model.manufactor.data.attributes.name}} {{data.model.name}}
+            {{data.data.attributes.year}} из {{data.city.country.data.attributes.name}}</h2>
         <ul>
             <li>VIN-код: {{data.data.attributes.vin}};</li>
             <li>Год выпуска: {{data.data.attributes.year}};</li>
@@ -614,37 +633,35 @@
         </ul>
         <h2>Условия покупки лота</h2>
         <p>
-            На данный момент стоимость лота составляет 0 USD, 
-            однако она может изменяться с появлением новых ставок на аукционе. 
-            Также данный автомобиль можно выкупить без участие в аукционе по цене {{ data.data.attributes.total_sum | number: '' : 'fr-CA'  }} USD. 
-            Окончательная цена автомобиля или цена «под ключ», формируется с учетом стоимости его доставки к заказчику, 
+            На данный момент стоимость лота составляет 0 USD,
+            однако она может изменяться с появлением новых ставок на аукционе.
+            Также данный автомобиль можно выкупить без участие в аукционе по цене {{ data.data.attributes.total_sum |
+            number: '' : 'fr-CA' }} USD.
+            Окончательная цена автомобиля или цена «под ключ», формируется с учетом стоимости его доставки к заказчику,
             расходов на оформление документов, сборов аукцион
         </p>
         <p>
-            Компания PLC Auctions обязуется пригнать автомобиль в любую страну Европы. 
+            Компания PLC Auctions обязуется пригнать автомобиль в любую страну Европы.
             Сроки доставки зависят от месторасположения лота и адреса, указанного заказчиком.
         </p>
         <p>
-            Узнайте более детальную информация на нашем сайте: ответы на все часто задаваемые вопросы, 
+            Узнайте более детальную информация на нашем сайте: ответы на все часто задаваемые вопросы,
             доставки авто, о других особенностях покупки автомобиля с помощью нашей компании.
         </p>
     </div>
 </section>
 <p-toast />
-<p-confirmDialog #dialog >
+<p-confirmDialog #dialog>
     <ng-template pTemplate="headless" let-message>
-        <div style="background: white; border-radius: 10px;" class="flex flex-column align-items-center p-5 surface-overlay border-round">
-            
+        <div style="background: white; border-radius: 10px;"
+            class="flex flex-column align-items-center p-5 surface-overlay border-round">
+
             <div style="font-weight: 700 !important; margin-bottom: 20px !important;">{{ message.header }}</div>
 
             <p class="mb-0">{{ message.message }}</p>
 
             <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
-                <button 
-                    pButton 
-                    label="Понятно" 
-                    (click)="dialog.accept()" 
-                    class="w-8rem">
+                <button pButton label="Понятно" (click)="dialog.accept()" class="w-8rem">
                 </button>
             </div>
         </div>
