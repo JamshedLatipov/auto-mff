@@ -1,6 +1,6 @@
 User-agent: *
 
-Allow: /
-Allow: /detail/
+Disallow: /api/
+Disallow: /admin/
 
 Sitemap: https://plc-auction.online/api/sitemap/index.xml
