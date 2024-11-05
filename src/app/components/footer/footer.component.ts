@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { WINDOW } from '../header/header.component';
 
 @Component({
   selector: 'app-footer',
@@ -9,5 +10,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
+  private _window = inject(WINDOW);
 
+  goToHome() {
+    this._window.location.href = 'https://plc.auction/';
+  }
 }

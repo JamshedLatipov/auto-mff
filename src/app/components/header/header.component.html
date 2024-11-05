@@ -13,7 +13,7 @@
             <input [formControl]="searchControl" style="width: 100%;" type="text" placeholder='Введите VIN/Номер Лота'>
             <div *ngIf="results$ | async as results" class="items">
                 <div *ngFor="let item of results.data" class="items-container">
-                    <a href="/detail/{{item.id}}">
+                    <a href="/detail/{{item.vin}}">
                         <div class="items-main-info">
                             <img class="img" [src]="backURL + item.attributes?.images.data[0].attributes.url" alt="">
                             <div>
