@@ -2,4 +2,4 @@ User-agent: *
 
 Disallow: /admin
 
-Sitemap: https://plc-auction.online/api/sitemap/index.xml
+Sitemap: https://plc-online.online/api/sitemap/index.xml
